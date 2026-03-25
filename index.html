@@ -31,7 +31,7 @@
 
         /* Simulation de décalage de lignes sans clignotement */
         .glitch::before, .glitch::after {
-            content: "404"; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            content: "404 ERROR"; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: black; clip: rect(0, 900px, 0, 0); 
         }
 
@@ -61,11 +61,11 @@
     <div class="corner top-right">B</div>
 
     <div class="glitch-wrapper">
-        <h1 class="glitch" data-text="404 ERROR">404 ERROR</h1>
-        <p>CRITICAL_SYSTEM_FAILURE
-        Oops! The page you're looking for is not here.
-        Go Back to Home
-        </p>
+        <center>
+            <h1 class="glitch" data-text="404 ERROR">404 ERROR</h1>
+                <p>CRITICAL_SYSTEM_FAILURE</p>
+                <p>Oops! The page you're looking for is not here. Go Back to Home !</p>  
+        </center>   
     </div>
 
     <div class="corner bottom-left" id="timer">12:00:00</div>
