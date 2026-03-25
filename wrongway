@@ -1,1 +1,18 @@
-
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>ACCESS DENIED</title>
+    <style>
+        body { background: #000; color: #ff0000; font-family: monospace; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .warning { font-size: 5rem; font-weight: bold; border: 5px solid #ff0000; padding: 20px; animation: blink 0.5s infinite; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
+        p { margin-top: 20px; font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+    <div class="warning">WRONG WAY</div>
+    <p>Wrong way my dear, try again !</p>
+    <p><a href="index.html" style="color: #fff;">Try again</a></p>
+</body>
+</html>
