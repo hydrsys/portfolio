@@ -9,44 +9,53 @@
             margin: 0; padding: 40px; line-height: 1.6;
         }
 
-        /* --- Barre de Navigation Discrète --- */
+
         nav { margin-bottom: 50px; border-bottom: 1px solid #1a1a1a; padding-bottom: 10px; }
-        nav a { color: #8a2be2; text-decoration: none; margin-right: 20px; font-size: 0.9rem; transition: 0.3s; }
+        nav a { color: #8a2be2; text-decoration: none; margin-right: 25px; font-size: 0.9rem; transition: 0.3s; }
         nav a:hover { color: #fff; text-shadow: 0 0 8px #8a2be2; }
 
-        /* --- Effet de "Prompt" --- */
-        .prompt { color: #8a2be2; font-weight: bold; }
-        .command { color: #fff; margin-bottom: 20px; }
-
-        /* --- Conteneur d'expérience --- */
-        .section { margin-bottom: 40px; display: none; } /* Caché au début pour l'effet de chargement */
-        .title { color: #8a2be2; font-size: 1.5rem; font-weight: bold; margin-bottom: 15px; text-transform: uppercase; }
         
-        .job-card { border-left: 2px solid #8a2be2; padding-left: 20px; margin-bottom: 25px; }
+        .prompt { color: #8a2be2; font-weight: bold; font-size: 0.8rem; }
+        .command { color: #fff; margin-bottom: 30px; font-size: 0.8rem; opacity: 0.8; }
+
+        
+        .section { margin-bottom: 40px; display: none; }
+        .title { color: #8a2be2; font-size: 1.5rem; font-weight: bold; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        
+        .job-card { border-left: 2px solid #8a2be2; padding-left: 20px; margin-bottom: 30px; }
         .job-company { font-weight: bold; color: #fff; font-size: 1.1rem; }
-        .job-date { color: #666; font-size: 0.8rem; }
-        .job-desc { color: #ccc; margin-top: 5px; }
+        .job-date { color: #666; font-size: 0.8rem; margin-bottom: 5px; }
+        .job-desc { color: #ccc; margin-top: 5px; font-size: 0.95rem; }
 
-        /* --- Animation de curseur clignotant --- */
-        .cursor { display: inline-block; width: 10px; height: 18px; background: #8a2be2; animation: blink 1s infinite; vertical-align: middle; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+       
+        .skills-section { margin-top: 60px; margin-bottom: 60px; }
 
-        #loading-text { margin-bottom: 20px; }
+     
+        .passions-container { margin-top: 40px; display: flex; gap: 15px; flex-wrap: wrap; }
+        .passion-tag { 
+            border: 1px solid #8a2be2; 
+            color: #8a2be2; 
+            padding: 5px 15px; 
+            font-size: 0.85rem; 
+            text-transform: lowercase;
+        }
+
+        #loading-text { margin-bottom: 20px; color: #fff; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
     <nav>
         <a href="home.html">> HOME</a>
+        <a href="about.html">> ABOUT</a>
         <a href="projects.html">> PROJECTS</a>
-        <a href="cv.pdf" target="_blank">> DOWNLOAD_CV</a>
     </nav>
 
     <div id="terminal">
         <div id="loading-text"></div>
         
         <div class="section" id="content">
-            <div class="command"><span class="prompt">guest@b-system:~$</span> cat profile.txt</div>
+            <div class="command"><span class="prompt">guest@b-system:~$</span> cat experience_log.db</div>
             
             <div class="title">Parcours Professionnel</div>
 
@@ -58,15 +67,25 @@
 
             <div class="job-card">
                 <div class="job-company">Université Blaise Pascal (UBP) - Technicien de maintenance</div>
-                <div class="job-date">Stage / Expérience</div>
+                <div class="job-date">Stage / Expérience technique</div>
                 <div class="job-desc">Maintenance matérielle, déploiement d'images système et gestion Active Directory.</div>
             </div>
 
-            <div class="title">Compétences_Clés</div>
-            <div class="job-desc">
-                * Sécurité : Fortinet, Firewalling<br>
-                * Systèmes : Windows Server, Active Directory, Linux<br>
-                * Monitoring : Zabbix, Centreon (R&D)
+            <div class="skills-section">
+                <div class="title">Compétences_Clés</div>
+                <div class="job-desc">
+                    <p>> <strong>SÉCURITÉ</strong> : Fortinet, Firewalling, Analyse de logs</p>
+                    <p>> <strong>SYSTÈMES</strong> : Windows Server, Active Directory, Linux (Debian/Ubuntu)</p>
+                    <p>> <strong>MONITORING</strong> : Zabbix, Centreon (Recherche & Développement)</p>
+                </div>
+            </div>
+
+            <div class="title">Passions</div>
+            <div class="passions-container">
+                <div class="passion-tag">#CyberSecurity</div>
+                <div class="passion-tag">#Hardware</div>
+                <div class="passion-tag">#VeilleTechno</div>
+                <div class="passion-tag">#Sport</div>
             </div>
         </div>
     </div>
@@ -85,20 +104,4 @@
 
         function typeLog() {
             if (lineIdx < lines.length) {
-                let p = document.createElement('div');
-                p.innerHTML = lines[lineIdx];
-                loader.appendChild(p);
-                lineIdx++;
-                setTimeout(typeLog, 600);
-            } else {
-                setTimeout(() => {
-                    loader.style.display = 'none';
-                    content.style.display = 'block';
-                }, 500);
-            }
-        }
-
-        typeLog();
-    </script>
-</body>
-</html>
+                let
