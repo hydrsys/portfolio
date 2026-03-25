@@ -1,1 +1,75 @@
-To be continued...
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>ABOUT - B. System</title>
+    <style>
+        body { 
+            background: #000; color: #fff; font-family: 'Courier New', monospace;
+            margin: 0; padding: 40px; line-height: 1.6;
+        }
+
+        /* --- Navigation --- */
+        nav { margin-bottom: 50px; border-bottom: 1px solid #1a1a1a; padding-bottom: 10px; }
+        nav a { color: #CF7AFF; text-decoration: none; margin-right: 25px; font-size: 0.9rem; transition: 0.3s; }
+        nav a:hover { color: #fff; text-shadow: 0 0 8px #CF7AFF; }
+
+        /* --- Container --- */
+        .about-container { max-width: 800px; }
+        .title { color: #CF7AFF; font-size: 1.5rem; font-weight: bold; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* --- Bio Style Log --- */
+        .bio-box { border: 1px solid #1a1a1a; padding: 25px; background: #050505; margin-bottom: 40px; }
+        .bio-text { color: #ccc; font-size: 1rem; margin-bottom: 20px; }
+        .bio-text strong { color: #CF7AFF; }
+
+        /* --- Bouton CV (Le point focal) --- */
+        .cv-button {
+            display: inline-block;
+            padding: 12px 25px;
+            border: 1px solid #CF7AFF;
+            color: #CF7AFF;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: 0.4s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cv-button:hover {
+            background: #CF7AFF;
+            color: #000;
+            box-shadow: 0 0 15px rgba(207, 122, 255, 0.5);
+        }
+
+        .status-line { font-size: 0.8rem; color: #666; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="home.html">> HOME</a>
+        <a href="about.html">> ABOUT</a>
+        <a href="projects.html">> PROJECTS</a>
+    </nav>
+
+    <div class="about-container">
+        <div class="status-line">> IDENTITY_FILE_LOADED: SUCCESS</div>
+        <div class="title">À Propos de Moi</div>
+
+        <div class="bio-box">
+            <p class="bio-text">
+                Actuellement en <strong>Bachelor 3 Informatique, Systèmes et Réseaux</strong>, je me spécialise dans la <strong>Cybersécurité</strong>. Mon parcours, marqué par des expériences chez <strong>M:armites</strong> et à l'<strong>UBP</strong>, m'a permis de forger une solide base technique en administration système et en sécurisation d'infrastructures.
+            </p>
+            <p class="bio-text">
+                Passionné par l'univers du <strong>Pentest</strong> et de la <strong>Défense active</strong>, je vois chaque vulnérabilité comme une opportunité d'apprentissage. Mon approche est simple : rigueur, curiosité constante et une veille technologique quotidienne.
+            </p>
+        </div>
+
+        <div class="status-line">> ACCESS_RESTRICTED_DOCUMENT: CV_2024.PDF</div>
+        <a href="cv.pdf" class="cv-button" target="_blank">Télécharger mon CV (.pdf)</a>
+    </div>
+
+</body>
+</html>
