@@ -81,6 +81,7 @@
     <div class="corner bottom-right" id="date"></div>
 
     <script>
+        <div class="status-text">
         // Timer
         let startTime = Date.now();
         const duration = 12 * 60 * 1000; 
@@ -126,7 +127,8 @@
             .catch(() => {
                 // En cas d'AdBlocker ou de problème réseau
                 dateElement.innerText = `${today} | ERROR`;
-            });        
+            }); 
+        </div>
      </script>
 </body>
 </html>
