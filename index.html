@@ -133,8 +133,8 @@
             })
             .then(data => {
                 // Affiche la ville et le pays si trouvés, sinon ERROR
-                if (data.ip && data.city) {
-                    dateElement.innerText = `${today} | ${data.ip.toUpperCase()} - ${data.city.toUpperCase()}`;
+                if (data.network && data.city) {
+                    dateElement.innerText = `${today} | ${data.network.toUpperCase()} - ${data.city.toUpperCase()}`;
                 } else {
                     dateElement.innerText = `${today} | ERROR`;
                 }
