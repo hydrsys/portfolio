@@ -14,6 +14,10 @@
         nav a { color: #CF7AFF; text-decoration: none; margin-right: 25px; font-size: 0.9rem; transition: 0.3s; }
         nav a:hover { color: #fff; text-shadow: 0 0 8px #CF7AFF; }
 
+        /* --- Commande Prompt --- */
+        .prompt { color: #CF7AFF; font-weight: bold; font-size: 0.8rem; }
+        .command { color: #fff; margin-bottom: 20px; font-size: 0.8rem; }
+        
         /* --- Container --- */
         .about-container { max-width: 800px; }
         .title { color: #CF7AFF; font-size: 1.5rem; font-weight: bold; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; }
@@ -120,5 +124,20 @@
         <a href="storage/CV - 2026.pdf" class="cv-button" target="_blank">Télécharger mon CV (.pdf)</a>
     </div>
 
+    <script>
+        const lines = [
+            "> Initializing connection...",
+            "> Decrypting secure layers...",
+            "> Access granted to: USER_B",
+            "> Loading profile data..."
+        ];
+        
+        const loader = document.getElementById('loading-text');
+        const content = document.getElementById('content');
+        let lineIdx = 0;
+
+
+        typeLog();
+    </script>
 </body>
 </html>
