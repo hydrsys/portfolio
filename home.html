@@ -8,15 +8,19 @@
             background: #000; color: #fff; font-family: 'Courier New', monospace;
             margin: 0; padding: 40px; line-height: 1.6;
         }
-
-        .corner { position: absolute; padding: 40px; font-size: 1rem; letter-spacing: -1px; }
-                
-        .top-right { top: 0; right: 0; font-size: 3rem; color: #ffffff; opacity: 1; font-weight: 900;}
         
         /* --- Barre de Navigation --- */
         nav { margin-bottom: 50px; border-bottom: 1px solid #1a1a1a; padding-bottom: 10px; }
         nav a { color: #CF7AFF; text-decoration: none; margin-right: 25px; font-size: 0.9rem; transition: 0.3s; }
+        .nav-container { display: flex; justify-content: space-between; align-items: baseline; }
         nav a:hover { color: #fff; text-shadow: 0 0 8px #CF7AFF; }
+
+        /* --- B ---*/
+        .corner-b { 
+        font-size: 3rem; 
+        color: #ffffff; 
+        font-weight: 900;
+        line-height: 1;
 
         /* --- Commande Prompt --- */
         .prompt { color: #CF7AFF; font-weight: bold; font-size: 0.8rem; }
@@ -62,7 +66,6 @@
             min-height: 50px;
         }
 
-        
         .passion-tag { 
             cursor: pointer;
             transition: 0.3s;
