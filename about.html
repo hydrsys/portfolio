@@ -24,6 +24,8 @@
         }
         
         /* --- Commande Prompt --- */
+        #content { display: none; max-width: 1100px; }
+        #loading-text { margin-bottom: 20px; color: #fff; font-size: 0.9rem; }
         .prompt { color: #CF7AFF; font-weight: bold; font-size: 0.8rem; }
         .command { color: #fff; margin-bottom: 20px; font-size: 0.8rem; }
         
@@ -66,7 +68,6 @@
         }
 
         .status-line { font-size: 0.8rem; color: #666; margin-bottom: 10px; }
-         #loading-text { margin-bottom: 20px; color: #fff; font-size: 0.9rem; }
     </style>
 </head>
 <body>
@@ -85,10 +86,10 @@
     <div id="terminal">
         <div id="loading-text"></div>
 
-        <div class="section" id="content">
-            <div class="command"><span class="prompt">guest@b-system:~$</span> whoami --status && ./check_permissions.sh</div>
+        <div id="content">
+            <div class="command"><span class="prompt">guest@b-system:~$</span> ls -la ./projects/deployed</div>
                      
-            <div class="about-container"></div>
+            <div class="about-container">
                 <div class="status-line">> IDENTITY_FILE_LOADED: SUCCESS</div>
                 <div class="title">À_PROPOS</div>
 
