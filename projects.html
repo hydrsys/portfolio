@@ -94,6 +94,24 @@
         }
 
         .project-link:hover { color: #CF7AFF; }
+        
+        .ctf-btn {
+            background: transparent;
+            border: 1px solid #CF7AFF;
+            color: #CF7AFF;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            transition: all 0.1s ease; /* Très rapide pour l'effet de téléportation */
+            position: relative; /* Nécessaire pour le déplacement */
+            z-index: 100;
+        }
+
+        .ctf-btn:hover {
+            background: rgba(207, 122, 255, 0.1);
+        }
+
+
 
     </style>
 </head>
@@ -177,6 +195,14 @@
            </div>
           <a href="storage/intrusion.pdf" class="project-link">> VIEW_REPORT</a>
       </div>
+
+         <div style="margin-top: 100px; text-align: center; border-top: 1px dashed #1a1a1a; padding-top: 40px;">
+           <p style="color: #444; font-size: 0.7rem;">[ SYSTEM_VULNERABILITY_DETECTED ]</p>
+           <button id="ctf-button" class="ctf-btn">Capture Me</button>
+           <div id="flag-display" style="display: none; margin-top: 20px; color: #00ff00; font-family: monospace; font-weight: bold;">
+           <span style="color: #CF7AFF;">> FLAG FOUND:</span> B_SYSTEM{C4TCH_M3_IF_YOU_C4N_2026}
+           </div>
+        </div>
                 
   </div>
             </div>
@@ -211,5 +237,37 @@
         }
         typeLog();
     </script>
+    <script>
+    const btn = document.getElementById('ctf-button');
+    const flag = document.getElementById('flag-display');
+    
+    // On définit aléatoirement le nombre de clics nécessaires entre 5 et 10
+    let clicksNeeded = Math.floor(Math.random() * (10 - 5 + 1)) + 5;
+    let currentClicks = 0;
+
+    btn.addEventListener('click', () => {
+        currentClicks++;
+
+        if (currentClicks < clicksNeeded) {
+            // Calcul de positions aléatoires (on reste dans les limites de la vue)
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth - 100);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight - 100);
+
+            // On passe le bouton en position fixed pour qu'il bouge partout
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+            
+            // On change le texte pour narguer l'utilisateur
+            btn.innerText = "ACCESS_DENIED";
+            setTimeout(() => { btn.innerText = "Try Again"; }, 500);
+        } else {
+            // Victoire !
+            btn.style.display = 'none';
+            flag.style.display = 'block';
+            console.log("Well played, hacker!");
+        }
+    });
+</script>
 </body>
 </html>
