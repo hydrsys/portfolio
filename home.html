@@ -58,20 +58,29 @@
             text-shadow: 0 0 8px #CF7AFF; 
         }
         
-        .nav-exit { 
-        font-size: 1.2rem;
-        color: ##E0E0E0;
-        font-weight: 900;
-        text-decoration: none;
-        line-height: 1;
-        transition: 0.3s;
-        cursor: pointer;
+        .nav-controls {
+            display: flex;
+            gap: 20px;
+            align-items: center;
         }
 
-        .nav-exit:hover { 
-        color: #E0E0E0; 
-        text-shadow: 0 0 10px #E0E0E0; 
-        transform: scale(1.1);
+        .control-btn {
+            font-size: 1.1rem;
+            color: #E0E0E0;
+            font-weight: 900;
+            text-decoration: none;
+            transition: 0.3s;
+            cursor: pointer;
+            padding: 5px 10px;
+            border: 1px solid transparent;
+        }
+        
+
+        .control-btn:hover {
+            color: #ff4444; 
+            text-shadow: 0 0 10px #ff4444;
+            border-color: #ff4444;
+            transform: scale(1.05);
         }
 
         .nav-container { 
@@ -195,9 +204,12 @@
             <a href="home.html">> <span class="lang-en">HOME</span><span class="lang-fr">ACCUEIL</span></a>
             <a href="about.html">> <span class="lang-en">ABOUT</span><span class="lang-fr">À PROPOS</span></a>
             <a href="projects.html">> <span class="lang-en">PROJECTS</span><span class="lang-fr">PROJETS</span></a>
-            <a id="lang-switch" style="margin-left: 20px; color: #fff; cursor: pointer;">[ FR ]</a>
         </div>
-        <a href="index.html" class="nav-exit"> [ EXIT ] </a>
+        
+        <div class="nav-controls">
+            <a id="lang-switch" class="control-btn">[ FR ]</a>
+            <a href="index.html" class="control-btn exit-btn"> [ EXIT ] </a>
+        </div>
     </div>
 </nav>
 
@@ -304,19 +316,19 @@
                 <div class="passions-container">
                     <div class="passion-tag" data-info="
                        <span class='lang-en'>Sports play a major role in my life. Whether it's volleyball, running, or weightlifting, I love pushing my limits. It helps me stay fit and clear my mind.</span>
-                       <span class='lang-fr'>Le sport occupe également une place importante dans ma vie. Que ce soit le volleyball, la course à pied ou la musculation, j'aime me dépenser physiquement et repousser mes limites. Le sport me permet de rester en forme et de me vider l'esprit. Chaque jour, je me lance de nouveaux défis que je souhaite relever afin de constamment m’améliorer dans ce que je fais.</span>
+                       <span class='lang-fr'>Le sport occupe également une place importante dans ma vie. Que ce soit le volleyball, la course à pied ou la musculation, j'aime me dépenser physiquement et repousser mes limites. Le sport me permet de rester en forme et de me vider l'esprit. Chaque jour, je me lance de nouveaux défis que je souhaite relever afin de constamment m’améliorer dans ce que je fais.</span>">
                        <span class="lang-en">#Volleyball</span>
                        <span class="lang-fr">#Volleyball</span>
                     </div>
                     <div class="passion-tag" data-info="
                        <span class='lang-en'>Beyond music and IT, I've always been fascinated by video games. From captivating stories to stunning graphics, they are a source of endless entertainment and creativity for me.</span>
-                       <span class='lang-fr'>En dehors de ma passion pour la musique et l’informatique, j'ai également un intérêt pour les jeux vidéo. Depuis mon enfance, je suis fasciné par l'univers des jeux, que ce soit pour leur histoire captivante, leurs graphismes époustouflants ou simplement pour le plaisir de jouer avec des amis. Les jeux vidéo sont pour moi une source de divertissement infinie et une façon fantastique de stimuler ma créativité.</span>
+                       <span class='lang-fr'>En dehors de ma passion pour la musique et l’informatique, j'ai également un intérêt pour les jeux vidéo. Depuis mon enfance, je suis fasciné par l'univers des jeux, que ce soit pour leur histoire captivante, leurs graphismes époustouflants ou simplement pour le plaisir de jouer avec des amis. Les jeux vidéo sont pour moi une source de divertissement infinie et une façon fantastique de stimuler ma créativité.</span>">
                        <span class="lang-en">#Video-games</span>
                        <span class="lang-fr">#Jeux-vidéo</span>
                     </div>
                     <div class="passion-tag" data-info="
                        <span class='lang-en'>Passionate about music and beatmaking, I spend my free time composing tracks. Nothing motivates me more than creating a catchy melody or finding the perfect rhythm.</span>
-                       <span class='lang-fr'>Passionné par la musique et le beatmaking, je passe une bonne partie de mon temps libre à composer des sons et à explorer de nouveaux genres musicaux. Rien ne me motive plus que de créer une mélodie entraînante ou de trouver le rythme parfait pour une chanson. J’ai au fond de moi toujours voulu vivre de ma musique et pouvoir remplacer mes artistes préférés qui m'inspire profondément.</span>
+                       <span class='lang-fr'>Passionné par la musique et le beatmaking, je passe une bonne partie de mon temps libre à composer des sons et à explorer de nouveaux genres musicaux. Rien ne me motive plus que de créer une mélodie entraînante ou de trouver le rythme parfait pour une chanson. J’ai au fond de moi toujours voulu vivre de ma musique et pouvoir remplacer mes artistes préférés qui m'inspire profondément.</span>">
                        <span class="lang-en">#Music</span>
                        <span class="lang-fr">#Musique</span>
                     </div>
@@ -331,7 +343,7 @@
 
         langBtn.addEventListener('click', () => {
             body.classList.toggle('fr-mode');
-            
+    
             if (body.classList.contains('fr-mode')) {
                 langBtn.innerText = "[ EN ]";
             } else {
