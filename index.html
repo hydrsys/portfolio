@@ -5,47 +5,95 @@
     <title>404 Not Found</title>
     <style>
         body { 
-            background: #000; color: #ffffff; font-family: 'Courier New', monospace;
-            height: 100vh; margin: 0; overflow: hidden; display: flex;
-            justify-content: center; align-items: center; position: relative;
+            background: #000; 
+            color: #ffffff; 
+            font-family: 'Courier New', monospace; 
+            height: 100vh; 
+            margin: 0; 
+            overflow: hidden; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            position: relative; 
+        }
+        
+        .corner { 
+            position: absolute; 
+            padding: 40px; 
+            font-size: 1rem; 
+            letter-spacing: -1px; 
         }
 
-        /* --- Éléments d'angle --- */
-        .corner { position: absolute; padding: 40px; font-size: 1rem; letter-spacing: -1px; }
+        .top-left { 
+            top: 0; 
+            left: 0; 
+        }
         
-        .top-left { top: 0; left: 0; }
-        .top-left a { color: #ffffff; text-decoration: none; padding: 5px 10px; transition: 0.3s; }
+        .top-left a { 
+            color: #ffffff; 
+            text-decoration: none; 
+            padding: 5px 10px; 
+            transition: 0.3s; 
+        }
         
-        .top-right { top: 0; right: 0; font-size: 3rem; color: #ffffff; opacity: 1; font-weight: 900;}
+        .top-right { 
+            top: 0; 
+            right: 0; 
+            font-size: 3rem; 
+            color: #ffffff; 
+            opacity: 1; 
+            font-weight: 900;
+        }
         
-        .bottom-left { bottom: 0; left: 0; color: #ffffff; font-weight: 900; }
+        .bottom-left { 
+            bottom: 0; 
+            left: 0; 
+            color: #ffffff; 
+            font-weight: 900; 
+        }
         
-        .bottom-right { bottom: 0; right: 0; color: #CF7AFF; }
+        .bottom-right { 
+            bottom: 0; 
+            right: 0; 
+            color: #CF7AFF; 
+        }
 
-        /* --- Effet Glitch Futuriste --- */
-        .glitch-wrapper { text-align: center; position: relative; }
+        .glitch-wrapper {
+            text-align: center; 
+            position: relative; 
+        }
         
-        .glitch {
-            font-size: 8rem; font-weight: 900; margin: 0;
-            position: relative; color: #ffffff;
+        .glitch { 
+            font-size: 8rem;
+            font-weight: 900;
+            margin: 0; 
+            position: relative;
+            color: #ffffff;
             letter-spacing: -5px;
         }
 
-        /* Simulation de décalage de lignes sans clignotement */
         .glitch::before, .glitch::after {
-            content: "404 ERROR"; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: black; clip: rect(0, 900px, 0, 0); 
+            content: "404 ERROR"; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%;
+            height: 100%;
+            background: black; 
+            clip: rect(0, 900px, 0, 0); 
         }
 
         .glitch::before {
             clip: rect(44px, 9999px, 56px, 0);
-            left: -2px; text-shadow: -2px 0 #CF7AFF;
+            left: -2px; 
+            text-shadow: -2px 0 #CF7AFF;
             animation: glitch-anim 2s infinite linear alternate-reverse;
         }
         
         .glitch::after {
             clip: rect(44px, 9999px, 56px, 0);
-            left: -2px; text-shadow: -2px 0 #ffffff;
+            left: -2px; 
+            text-shadow: -2px 0 #ffffff;
             animation: glitch-anim 3s infinite linear alternate-reverse;
         }
 
@@ -58,7 +106,12 @@
             100% { clip: rect(45px, 9999px, 55px, 0); transform: skew(-0.8deg); }
         }
 
-        .status-text { font-size: 1rem; color: #CF7AFF; letter-spacing: -1px; margin-top: -10px; }
+        .status-text { 
+            font-size: 1rem; 
+            color: #CF7AFF; 
+            letter-spacing: -1px; 
+            margin-top: -10px; 
+        }
 
         .status-link {
             color: #CF7AFF;
