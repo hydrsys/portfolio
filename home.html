@@ -376,7 +376,9 @@
                 tag.classList.add('active');
 
                 descriptionBox.style.display = 'block';
-                descriptionBox.innerHtml = tag.getAttribute('data-info');
+                
+                const info = tag.getAttribute('data-info');
+                descriptionBox.innerHTML = info;
             });
         });
 
