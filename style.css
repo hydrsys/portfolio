@@ -909,11 +909,12 @@ body.page-victory::before {
 
 /** PROJECTS SOLAR SYSTEM **/
 
+/* Layout — responsive */
 #solar-layout {
   display: flex;
-  gap: 0;
   height: calc(100vh - 160px);
-  min-height: 480px;
+  min-height: 400px;
+  position: relative;
 }
 
 #solar-canvas {
@@ -922,64 +923,92 @@ body.page-victory::before {
   height: 100%;
   display: block;
   background: #000;
-  border-right: 1px solid #1a1a1a;
 }
 
+/* Project panel — compact card style */
 #project-panel {
   flex: 0 0 40%;
   width: 40%;
   height: 100%;
-  background: #030303;
-  border: 1px solid #1a1a1a;
-  border-left: none;
-  padding: 30px 28px;
+  background: #050505;
+  border-left: 1px solid #1a1a1a;
   box-sizing: border-box;
   font-family: 'Courier New', monospace;
   position: relative;
   overflow-y: auto;
-  transition: border-color 0.4s, box-shadow 0.4s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* When no project selected — placeholder */
+#project-panel:not(.visible) .sp-placeholder {
+  display: block;
+}
+#project-panel.visible .sp-placeholder {
+  display: none;
 }
 
 .sp-placeholder {
-  color: #333;
-  font-size: 0.75rem;
+  color: #2a2a2a;
+  font-size: 0.7rem;
   letter-spacing: 2px;
-  margin-top: 40%;
   text-align: center;
+  padding: 20px;
 }
+
+/* The card itself — compact, original project-card style */
+#project-panel.visible {
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 30px 24px;
+}
+
+.sp-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  color: #444;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  font-family: 'Courier New', monospace;
+}
+.sp-close:hover { color: #fff; }
 
 .sp-status {
   font-size: 0.65rem;
   letter-spacing: 2px;
   text-transform: uppercase;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
+  display: block;
 }
 
 .sp-title {
   color: #fff;
-  font-size: 1rem;
   font-weight: bold;
+  font-size: 0.95rem;
   line-height: 1.4;
-  margin-bottom: 16px;
-  letter-spacing: 1px;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
 }
 
 .sp-desc {
   color: #888;
-  font-size: 0.8rem;
-  line-height: 1.7;
-  margin-bottom: 20px;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  margin-bottom: 16px;
 }
 
 .sp-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .sp-tag {
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   padding: 2px 8px;
   border-radius: 2px;
   font-family: 'Courier New', monospace;
@@ -988,25 +1017,45 @@ body.page-victory::before {
 .sp-link {
   display: inline-block;
   text-decoration: none;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: bold;
-  padding: 8px 16px;
+  padding: 7px 14px;
   border: 1px solid;
-  transition: background 0.3s, color 0.3s;
+  transition: background 0.25s;
+  font-family: 'Courier New', monospace;
+}
+.sp-link:hover { background: rgba(255,255,255,0.07); }
+
+/* ── RESPONSIVE ── */
+
+/* Tablet (≤900px) — stack vertically */
+@media (max-width: 900px) {
+  #solar-layout {
+    flex-direction: column;
+    height: auto;
+  }
+  #solar-canvas {
+    flex: none;
+    width: 100%;
+    height: 55vw;
+    min-height: 300px;
+  }
+  #project-panel {
+    flex: none;
+    width: 100%;
+    height: auto;
+    min-height: 200px;
+    border-left: none;
+    border-top: 1px solid #1a1a1a;
+  }
 }
 
-.sp-link:hover {
-  background: rgba(255,255,255,0.08);
+/* Mobile (≤480px) */
+@media (max-width: 480px) {
+  #solar-canvas {
+    height: 70vw;
+    min-height: 260px;
+  }
+  .sp-title  { font-size: 0.85rem; }
+  .sp-desc   { font-size: 0.7rem;  }
 }
-
-.sp-close {
-  position: absolute;
-  top: 14px;
-  right: 18px;
-  color: #444;
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: color 0.2s;
-}
-
-.sp-close:hover { color: #fff; }
