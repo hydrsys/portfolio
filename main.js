@@ -302,18 +302,19 @@ function initHintButton() {
     }
   });
 }
+
 /** Projects page — animated solar system **/
- 
+
 function initSolarSystem() {
   const canvas = document.getElementById('solar-canvas');
   const panel  = document.getElementById('project-panel');
   if (!canvas || !panel) return;
- 
+
   const ctx = canvas.getContext('2d');
   let lang  = document.body.classList.contains('fr-mode') ? 'fr' : 'en';
   let activePlanet = null;
   let animId = null;
- 
+
   /* ── CATEGORY COLOURS ── */
   const CAT_COLORS = {
     redteam:  '#e05555',
@@ -321,7 +322,7 @@ function initSolarSystem() {
     code:     '#55e0a0',
     ctf:      '#e0c455',
   };
- 
+
   /* ── PROJECTS DATA ── */
   const PROJECTS = [
     {
@@ -379,7 +380,7 @@ function initSolarSystem() {
       link:   { label: '> VIEW_BADGES', href: '#', blank: false },
     },
   ];
- 
+
   /* ── ORBIT SETUP ──
      One orbit per category. Projects in same category are equidistant on that orbit.
      Speed varies per orbit for natural feel.
@@ -390,18 +391,18 @@ function initSolarSystem() {
     { cat: 'code',     radiusFactor: 0.34, speed: 0.00010, color: CAT_COLORS.code     },
     { cat: 'ctf',      radiusFactor: 0.41, speed: 0.00007, color: CAT_COLORS.ctf      },
   ];
- 
+
   /* Assign initial angles — equidistant within orbit */
   const orbitAngleOffset = {}; // keyed by orbitDef.cat
   ORBIT_DEFS.forEach(od => { orbitAngleOffset[od.cat] = 0; });
- 
+
   // Compute per-planet starting angle so they're evenly spread
   ORBIT_DEFS.forEach(od => {
     const planets = PROJECTS.filter(p => p.cat === od.cat);
     const step = (2 * Math.PI) / planets.length;
     planets.forEach((p, i) => { p._angleOffset = step * i; });
   });
- 
+
   /* ── RESIZE ── */
   function resize() {
     canvas.width  = canvas.offsetWidth;
@@ -409,24 +410,24 @@ function initSolarSystem() {
   }
   resize();
   window.addEventListener('resize', resize);
- 
+
   function cx() { return canvas.width  * 0.5; }
   function cy() { return canvas.height * 0.5; }
- 
+
   /* ── DRAW ── */
   let lastTime = 0;
   const elapsedAngle = {}; // per category cumulative angle
   ORBIT_DEFS.forEach(od => { elapsedAngle[od.cat] = 0; });
- 
+
   function draw(ts) {
     const dt = ts - lastTime;
     lastTime = ts;
- 
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
- 
+
     const CX = cx(), CY = cy();
     const minDim = Math.min(canvas.width, canvas.height);
- 
+
     /* Stars */
     ctx.fillStyle = '#000';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -443,7 +444,7 @@ function initSolarSystem() {
       ctx.fillStyle = `rgba(255,255,255,${s.a})`;
       ctx.fill();
     });
- 
+
     /* Sun */
     const sunR = minDim * 0.055;
     const grad = ctx.createRadialGradient(CX, CY, 0, CX, CY, sunR * 1.8);
@@ -461,19 +462,19 @@ function initSolarSystem() {
     ctx.shadowBlur  = 30;
     ctx.fill();
     ctx.shadowBlur = 0;
- 
+
     /* Orbits + planets */
     ORBIT_DEFS.forEach(od => {
       elapsedAngle[od.cat] += od.speed * dt;
       const R = minDim * od.radiusFactor;
- 
+
       /* Orbit ring */
       ctx.beginPath();
       ctx.arc(CX, CY, R, 0, Math.PI * 2);
       ctx.strokeStyle = od.color + '33';
       ctx.lineWidth   = 1;
       ctx.stroke();
- 
+
       /* Planets */
       const planets = PROJECTS.filter(p => p.cat === od.cat);
       planets.forEach(p => {
@@ -481,10 +482,10 @@ function initSolarSystem() {
         const px = CX + R * Math.cos(angle);
         const py = CY + R * Math.sin(angle);
         p._px = px; p._py = py; // store for hit detection
- 
+
         const pR     = minDim * 0.028;
         const isActive = activePlanet && activePlanet.id === p.id;
- 
+
         /* Glow when active */
         if (isActive) {
           ctx.beginPath();
@@ -495,7 +496,7 @@ function initSolarSystem() {
           ctx.fillStyle = glow;
           ctx.fill();
         }
- 
+
         /* Planet body */
         ctx.beginPath();
         ctx.arc(px, py, pR, 0, Math.PI * 2);
@@ -504,7 +505,7 @@ function initSolarSystem() {
         ctx.shadowBlur  = isActive ? 18 : 8;
         ctx.fill();
         ctx.shadowBlur  = 0;
- 
+
         /* Floating label above planet */
         ctx.font      = `bold ${Math.max(9, minDim * 0.022)}px 'Courier New', monospace`;
         ctx.fillStyle = isActive ? '#fff' : od.color + 'cc';
@@ -512,12 +513,12 @@ function initSolarSystem() {
         ctx.fillText(p.name[lang], px, py - pR - 7);
       });
     });
- 
+
     animId = requestAnimationFrame(draw);
   }
- 
+
   animId = requestAnimationFrame(draw);
- 
+
   /* ── HIT DETECTION ── */
   canvas.addEventListener('click', e => {
     const rect  = canvas.getBoundingClientRect();
@@ -525,14 +526,14 @@ function initSolarSystem() {
     const my    = e.clientY - rect.top;
     const minDim = Math.min(canvas.width, canvas.height);
     const hitR  = minDim * 0.028 + 6;
- 
+
     let hit = null;
     PROJECTS.forEach(p => {
       if (p._px === undefined) return;
       const dx = mx - p._px, dy = my - p._py;
       if (Math.sqrt(dx * dx + dy * dy) <= hitR) hit = p;
     });
- 
+
     if (!hit) return;
     if (activePlanet && activePlanet.id === hit.id) {
       activePlanet = null;
@@ -543,7 +544,7 @@ function initSolarSystem() {
       panel.classList.add('visible');
     }
   });
- 
+
   /* Cursor change on hover */
   canvas.addEventListener('mousemove', e => {
     const rect   = canvas.getBoundingClientRect();
@@ -559,7 +560,7 @@ function initSolarSystem() {
     });
     canvas.style.cursor = over ? 'pointer' : 'default';
   });
- 
+
   /* ── PANEL ── */
   function renderPanel(proj, l) {
     const color = CAT_COLORS[proj.cat];
@@ -580,7 +581,7 @@ function initSolarSystem() {
       panel.classList.remove('visible');
     });
   }
- 
+
   /* ── LANGUAGE SWITCH ── */
   const langBtn = document.getElementById('lang-switch');
   if (langBtn) {
@@ -590,9 +591,9 @@ function initSolarSystem() {
     });
   }
 }
- 
+
 /** INIT **/
- 
+
 document.addEventListener('DOMContentLoaded', () => {
   initLangSwitch();
   initProjectsLoader();
@@ -607,24 +608,24 @@ document.addEventListener('DOMContentLoaded', () => {
 });
   const svg  = document.getElementById('connector-svg');
   if (!wrap || !svg) return;
- 
+
   let activeCat = null;
   let lang = document.body.classList.contains('fr-mode') ? 'fr' : 'en';
- 
+
   const CATEGORIES = [
     { id: 'redteam',  label: { en: 'RED<br>TEAM', fr: 'RED<br>TEAM' } },
     { id: 'sysadmin', label: { en: 'SYSADMIN',    fr: 'SYSADMIN'    } },
     { id: 'code',     label: { en: 'CODE',         fr: 'CODE'        } },
     { id: 'ctf',      label: { en: 'CTF',          fr: 'CTF'         } },
   ];
- 
+
   const CAT_POS = [
     { rx: 0.22, ry: 0.22 },
     { rx: 0.78, ry: 0.22 },
     { rx: 0.22, ry: 0.78 },
     { rx: 0.78, ry: 0.78 },
   ];
- 
+
   const PROJECTS = [
     {
       cat: 'redteam',
@@ -675,10 +676,10 @@ document.addEventListener('DOMContentLoaded', () => {
       link:   { label: '> VIEW_BADGES', href: '#', blank: false },
     },
   ];
- 
+
   function W() { return wrap.offsetWidth; }
   function H() { return wrap.offsetHeight; }
- 
+
   function buildProjHTML(proj, l) {
     const tags  = proj.tags.map(t => `<span class="proj-tag">${t}</span>`).join('');
     const blank = proj.link.blank ? 'target="_blank"' : '';
@@ -690,7 +691,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <a href="${proj.link.href}" ${blank} class="proj-link">${proj.link.label}</a>
     `;
   }
- 
+
   /* Build nodes */
   CATEGORIES.forEach((cat, i) => {
     const el = document.createElement('div');
@@ -703,7 +704,7 @@ document.addEventListener('DOMContentLoaded', () => {
     el.addEventListener('click', () => toggleCategory(cat.id, i));
     wrap.appendChild(el);
   });
- 
+
   PROJECTS.forEach((proj, i) => {
     const el = document.createElement('div');
     el.className   = 'proj-node';
@@ -712,14 +713,14 @@ document.addEventListener('DOMContentLoaded', () => {
     el.innerHTML   = buildProjHTML(proj, lang);
     wrap.appendChild(el);
   });
- 
+
   PROJECTS.forEach((_, i) => {
     const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
     line.classList.add('connector-line');
     line.id = 'line-' + i;
     svg.appendChild(line);
   });
- 
+
   function orbitPositions(catIdx, total) {
     const cx = CAT_POS[catIdx].rx * W();
     const cy = CAT_POS[catIdx].ry * H();
@@ -738,7 +739,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return { px, py, cx, cy };
     });
   }
- 
+
   function toggleCategory(catId, catIdx) {
     if (activeCat === catId) { closeAll(); return; }
     closeAll(false);
@@ -760,14 +761,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }, k * 70);
     });
   }
- 
+
   function closeAll(resetActive = true) {
     if (resetActive) activeCat = null;
     document.querySelectorAll('.cat-node').forEach(el => el.classList.remove('active'));
     document.querySelectorAll('.proj-node').forEach(el => el.classList.remove('visible'));
     document.querySelectorAll('.connector-line').forEach(el => el.classList.remove('visible'));
   }
- 
+
   /* Language switch hook */
   const langBtn = document.getElementById('lang-switch');
   if (langBtn) {
@@ -784,7 +785,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
- 
+
   /* Resize */
   let resizeTimer;
   window.addEventListener('resize', () => {
@@ -799,9 +800,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 100);
   });
 }
- 
+
 /** INIT **/
- 
+
 document.addEventListener('DOMContentLoaded', () => {
   initLangSwitch();
   initProjectsLoader();
