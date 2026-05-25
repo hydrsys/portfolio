@@ -908,14 +908,14 @@ body.page-victory::before {
 }
 
 /** PROJECTS SOLAR SYSTEM **/
- 
+
 #solar-layout {
   display: flex;
   gap: 0;
   height: calc(100vh - 160px);
   min-height: 480px;
 }
- 
+
 #solar-canvas {
   flex: 0 0 60%;
   width: 60%;
@@ -924,7 +924,7 @@ body.page-victory::before {
   background: #000;
   border-right: 1px solid #1a1a1a;
 }
- 
+
 #project-panel {
   flex: 0 0 40%;
   width: 40%;
@@ -939,7 +939,7 @@ body.page-victory::before {
   overflow-y: auto;
   transition: border-color 0.4s, box-shadow 0.4s;
 }
- 
+
 .sp-placeholder {
   color: #333;
   font-size: 0.75rem;
@@ -947,14 +947,14 @@ body.page-victory::before {
   margin-top: 40%;
   text-align: center;
 }
- 
+
 .sp-status {
   font-size: 0.65rem;
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-bottom: 16px;
 }
- 
+
 .sp-title {
   color: #fff;
   font-size: 1rem;
@@ -963,28 +963,28 @@ body.page-victory::before {
   margin-bottom: 16px;
   letter-spacing: 1px;
 }
- 
+
 .sp-desc {
   color: #888;
   font-size: 0.8rem;
   line-height: 1.7;
   margin-bottom: 20px;
 }
- 
+
 .sp-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
   margin-bottom: 24px;
 }
- 
+
 .sp-tag {
   font-size: 0.65rem;
   padding: 2px 8px;
   border-radius: 2px;
   font-family: 'Courier New', monospace;
 }
- 
+
 .sp-link {
   display: inline-block;
   text-decoration: none;
@@ -994,11 +994,11 @@ body.page-victory::before {
   border: 1px solid;
   transition: background 0.3s, color 0.3s;
 }
- 
+
 .sp-link:hover {
   background: rgba(255,255,255,0.08);
 }
- 
+
 .sp-close {
   position: absolute;
   top: 14px;
@@ -1008,5 +1008,5 @@ body.page-victory::before {
   cursor: pointer;
   transition: color 0.2s;
 }
- 
+
 .sp-close:hover { color: #fff; }
