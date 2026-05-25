@@ -313,15 +313,272 @@ function initSolarSystem() {
   const ctx = canvas.getContext('2d');
   let lang  = document.body.classList.contains('fr-mode') ? 'fr' : 'en';
   let activePlanet = null;
-  let animId = null;
 
-  /* ── CATEGORY COLOURS ── */
+  /* ── CATEGORY COLOURS — pure RGB, no pale ── */
   const CAT_COLORS = {
-    redteam:  '#e05555',
-    sysadmin: '#5599e0',
-    code:     '#55e0a0',
-    ctf:      '#e0c455',
+    redteam:  '#ff2222',
+    sysadmin: '#2288ff',
+    code:     '#00ff88',
+    ctf:      '#ffcc00',
   };
+
+  /* ── PROJECTS DATA ── */
+  const PROJECTS = [
+    {
+      id: 0, cat: 'redteam',
+      name: { en: 'Vuln Exploit', fr: 'Exploitation' },
+      status: { en: 'COMPLETED', fr: 'TERMINÉ' },
+      title:  { en: 'Vulnerability Exploitation', fr: 'Exploitation de Vulnérabilités' },
+      desc:   { en: 'Intrusion simulations with Metasploit, Nmap & Pivoting techniques.', fr: 'Simulations d\'intrusions via Metasploit, Nmap et Pivotement.' },
+      tags:   ['Metasploit', 'Pentest', 'Nmap'],
+      link:   { label: '> EXPLOIT_LOGS', href: '../storage/metasploit.pdf', blank: true },
+    },
+    {
+      id: 1, cat: 'redteam',
+      name: { en: 'Linux Intrusion', fr: 'Intrusion Linux' },
+      status: { en: 'COMPLETED', fr: 'TERMINÉ' },
+      title:  { en: 'Linux Intrusion Test', fr: 'Test d\'intrusion Linux' },
+      desc:   { en: 'Boot-to-Root: research & exploitation of a vulnerable machine.', fr: 'Boot-to-Root : exploitation d\'une machine vulnérable.' },
+      tags:   ['Intrusion', 'Boot-to-Root', 'Linux'],
+      link:   { label: '> VIEW_REPORT', href: '../storage/intrusion.pdf', blank: true },
+    },
+    {
+      id: 2, cat: 'sysadmin',
+      name: { en: 'Active Directory', fr: 'Active Directory' },
+      status: { en: 'COMPLETED', fr: 'TERMINÉ' },
+      title:  { en: 'Active Directory — ValorElec', fr: 'Active Directory — ValorElec' },
+      desc:   { en: 'Windows Server infra, PowerShell automation, restrictive GPOs.', fr: 'Infra Windows Server, automatisation PowerShell, GPO restrictives.' },
+      tags:   ['Active Directory', 'PowerShell', 'GPO'],
+      link:   { label: '> CASE_FILE', href: '../storage/ValorElec.pdf', blank: true },
+    },
+    {
+      id: 3, cat: 'sysadmin',
+      name: { en: 'Linux Hardening', fr: 'Hardening Linux' },
+      status: { en: 'COMPLETED', fr: 'TERMINÉ' },
+      title:  { en: 'Linux Hardening', fr: 'Hardening Linux' },
+      desc:   { en: 'SSH keys only, IPTables/UFW firewall, CIS Benchmark compliance.', fr: 'SSH clés uniquement, pare-feu UFW, CIS Benchmark.' },
+      tags:   ['Linux', 'Hardening', 'SSH Security'],
+      link:   { label: '> SECURITY_POLICIES', href: '../storage/hardening.pdf', blank: true },
+    },
+    {
+      id: 4, cat: 'code',
+      name: { en: 'ACB Website', fr: 'Site ACB' },
+      status: { en: 'LIVE', fr: 'EN COURS' },
+      title:  { en: 'Client Website — ACB', fr: 'Site Web Client — ACB' },
+      desc:   { en: 'Full front-end website for a client, hosted on GitHub Pages.', fr: 'Site front-end complet pour un client, hébergé sur GitHub Pages.' },
+      tags:   ['HTML', 'CSS', 'JavaScript', 'GitHub'],
+      link:   { label: '> VIEW_LIVE_SITE', href: 'https://monpolar.github.io/acb/', blank: true },
+    },
+    {
+      id: 5, cat: 'code',
+      name: { en: 'Portfolio', fr: 'Portfolio' },
+      status: { en: 'LIVE', fr: 'EN COURS' },
+      title:  { en: 'Portfolio — B_SYSTEM', fr: 'Portfolio — B_SYSTEM' },
+      desc:   { en: 'This very portfolio, built from scratch with HTML, CSS & JS. Terminal aesthetic, CTF easter eggs included.', fr: 'Ce portfolio, construit from scratch en HTML, CSS & JS. Esthétique terminal, easter eggs CTF inclus.' },
+      tags:   ['HTML', 'CSS', 'JavaScript', 'GitHub'],
+      link:   { label: '> VIEW_SOURCE', href: 'https://github.com/MonPOLAR/portfolio', blank: true },
+    },
+    {
+      id: 6, cat: 'ctf',
+      name: { en: 'CTF Training', fr: 'CTF Training' },
+      status: { en: 'LIVE', fr: 'EN COURS' },
+      title:  { en: 'CTF Training', fr: 'Entraînement CTF' },
+      desc:   { en: 'Root-Me & TryHackMe. Focus on Web exploitation and Privilege Escalation.', fr: 'Root-Me & TryHackMe. Focus : Web & Escalade de Privilèges.' },
+      tags:   ['CTF', 'PrivEsc', 'Cyber-Training'],
+      link:   { label: '> VIEW_BADGES', href: '#', blank: false },
+    },
+  ];
+
+  const ORBIT_DEFS = [
+    { cat: 'redteam',  radiusFactor: 0.18, speed: 0.00025, color: CAT_COLORS.redteam  },
+    { cat: 'sysadmin', radiusFactor: 0.28, speed: 0.00016, color: CAT_COLORS.sysadmin },
+    { cat: 'code',     radiusFactor: 0.38, speed: 0.00010, color: CAT_COLORS.code     },
+    { cat: 'ctf',      radiusFactor: 0.46, speed: 0.00007, color: CAT_COLORS.ctf      },
+  ];
+
+  ORBIT_DEFS.forEach(od => {
+    const planets = PROJECTS.filter(p => p.cat === od.cat);
+    const step = (2 * Math.PI) / planets.length;
+    planets.forEach((p, i) => { p._angleOffset = step * i; });
+  });
+
+  /* ── RESIZE ── */
+  function resize() {
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); });
+
+  function CX() { return canvas.width  * 0.5; }
+  function CY() { return canvas.height * 0.5; }
+
+  /* ── DRAW ── */
+  let lastTime = 0;
+  const elapsedAngle = {};
+  ORBIT_DEFS.forEach(od => { elapsedAngle[od.cat] = 0; });
+
+  function draw(ts) {
+    const dt = Math.min(ts - lastTime, 50); // cap dt to avoid jump on tab switch
+    lastTime = ts;
+
+    const W = canvas.width, H = canvas.height;
+    const cx = CX(), cy = CY();
+    const minDim = Math.min(W, H);
+
+    ctx.clearRect(0, 0, W, H);
+
+    /* Black background — no stars */
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, W, H);
+
+    /* Sun */
+    const sunR = minDim * 0.052;
+    const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, sunR * 2);
+    grad.addColorStop(0,   'rgba(255,255,255,1)');
+    grad.addColorStop(0.4, 'rgba(207,122,255,0.8)');
+    grad.addColorStop(1,   'rgba(207,122,255,0)');
+    ctx.beginPath();
+    ctx.arc(cx, cy, sunR * 2, 0, Math.PI * 2);
+    ctx.fillStyle = grad;
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(cx, cy, sunR, 0, Math.PI * 2);
+    ctx.fillStyle = '#ffffff';
+    ctx.shadowColor = '#CF7AFF';
+    ctx.shadowBlur  = 35;
+    ctx.fill();
+    ctx.shadowBlur = 0;
+
+    /* Orbits + planets */
+    ORBIT_DEFS.forEach(od => {
+      elapsedAngle[od.cat] += od.speed * dt;
+      const R = minDim * od.radiusFactor;
+
+      /* Orbit ring — more visible */
+      ctx.beginPath();
+      ctx.arc(cx, cy, R, 0, Math.PI * 2);
+      ctx.strokeStyle = od.color + '55';
+      ctx.lineWidth   = 1.5;
+      ctx.setLineDash([4, 6]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      /* Planets */
+      const planets = PROJECTS.filter(p => p.cat === od.cat);
+      planets.forEach(p => {
+        const angle = elapsedAngle[od.cat] + p._angleOffset;
+        const px = cx + R * Math.cos(angle);
+        const py = cy + R * Math.sin(angle);
+        p._px = px; p._py = py;
+
+        const pR       = minDim * 0.024;
+        const isActive = activePlanet && activePlanet.id === p.id;
+
+        /* Glow */
+        if (isActive) {
+          const glow = ctx.createRadialGradient(px, py, 0, px, py, pR * 2.5);
+          glow.addColorStop(0, od.color + '99');
+          glow.addColorStop(1, 'transparent');
+          ctx.beginPath();
+          ctx.arc(px, py, pR * 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = glow;
+          ctx.fill();
+        }
+
+        /* Planet body */
+        ctx.beginPath();
+        ctx.arc(px, py, pR, 0, Math.PI * 2);
+        ctx.fillStyle   = od.color;
+        ctx.shadowColor = od.color;
+        ctx.shadowBlur  = isActive ? 22 : 10;
+        ctx.fill();
+        ctx.shadowBlur  = 0;
+
+        /* Label — smaller font, no overlap */
+        const fontSize = Math.max(8, minDim * 0.016);
+        ctx.font      = `bold ${fontSize}px 'Courier New', monospace`;
+        ctx.fillStyle = isActive ? '#ffffff' : od.color;
+        ctx.textAlign = 'center';
+        ctx.fillText(p.name[lang], px, py - pR - 5);
+      });
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
+
+  /* ── HIT DETECTION ── */
+  canvas.addEventListener('click', e => {
+    const rect   = canvas.getBoundingClientRect();
+    const mx     = e.clientX - rect.left;
+    const my     = e.clientY - rect.top;
+    const hitR   = Math.min(canvas.width, canvas.height) * 0.024 + 8;
+
+    let hit = null;
+    PROJECTS.forEach(p => {
+      if (p._px === undefined) return;
+      const dx = mx - p._px, dy = my - p._py;
+      if (Math.sqrt(dx * dx + dy * dy) <= hitR) hit = p;
+    });
+
+    if (!hit) return;
+    if (activePlanet && activePlanet.id === hit.id) {
+      activePlanet = null;
+      panel.classList.remove('visible');
+    } else {
+      activePlanet = hit;
+      renderPanel(hit, lang);
+      panel.classList.add('visible');
+    }
+  });
+
+  canvas.addEventListener('mousemove', e => {
+    const rect  = canvas.getBoundingClientRect();
+    const mx    = e.clientX - rect.left;
+    const my    = e.clientY - rect.top;
+    const hitR  = Math.min(canvas.width, canvas.height) * 0.024 + 8;
+    let over = false;
+    PROJECTS.forEach(p => {
+      if (p._px === undefined) return;
+      const dx = mx - p._px, dy = my - p._py;
+      if (Math.sqrt(dx * dx + dy * dy) <= hitR) over = true;
+    });
+    canvas.style.cursor = over ? 'pointer' : 'default';
+  });
+
+  /* ── PANEL ── */
+  function renderPanel(proj, l) {
+    const color = CAT_COLORS[proj.cat];
+    const tags  = proj.tags.map(t =>
+      `<span class="sp-tag" style="color:${color};background:${color}22;">${t}</span>`
+    ).join('');
+    const blank = proj.link.blank ? 'target="_blank"' : '';
+    panel.style.setProperty('--panel-color', color);
+    panel.innerHTML = `
+      <div class="sp-close" id="sp-close">✕</div>
+      <div class="sp-status" style="color:${color}">[ ${proj.status[l]} ] — ${proj.cat.toUpperCase()}</div>
+      <div class="sp-title">${proj.title[l]}</div>
+      <div class="sp-desc">${proj.desc[l]}</div>
+      <div class="sp-tags">${tags}</div>
+      <a href="${proj.link.href}" ${blank} class="sp-link" style="color:${color};border-color:${color}66;">${proj.link.label}</a>
+    `;
+    document.getElementById('sp-close').addEventListener('click', () => {
+      activePlanet = null;
+      panel.classList.remove('visible');
+    });
+  }
+
+  /* ── LANGUAGE SWITCH ── */
+  const langBtn = document.getElementById('lang-switch');
+  if (langBtn) {
+    langBtn.addEventListener('click', () => {
+      lang = document.body.classList.contains('fr-mode') ? 'fr' : 'en';
+      if (activePlanet) renderPanel(activePlanet, lang);
+    });
+  }
+}
 
   /* ── PROJECTS DATA ── */
   const PROJECTS = [
