@@ -936,6 +936,12 @@ body.page-victory::before {
   padding: 20px;
 }
 
+opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
 #project-panel:empty,
 #project-panel:not(.visible) {
   pointer-events: none;
@@ -944,6 +950,12 @@ body.page-victory::before {
 #project-panel .project-card {
   width: 100%;
   max-width: 340px;
+}
+
+#project-panel.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 /* Responsive */
