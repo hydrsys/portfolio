@@ -159,6 +159,9 @@ function initProjectsLoader() {
       setTimeout(() => {
         loader.style.display = 'none';
         content.style.display = 'block';
+
+        window.dispatchEvent(new Event('resize'));
+        
       }, 300);
     }
   }
