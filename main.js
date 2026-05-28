@@ -385,7 +385,7 @@ function initSolarSystem() {
       title:  { en: 'CTF Training', fr: 'Entraînement CTF' },
       desc:   { en: 'Root-Me & TryHackMe. Focus on Web exploitation and Privilege Escalation.', fr: 'Root-Me & TryHackMe. Focus : Web & Escalade de Privilèges.' },
       tags:   ['CTF', 'PrivEsc', 'Cyber-Training'],
-      link:   { label: '> VIEW_BADGES', href: '#', blank: false },
+      link:   { label: '> VIEW_BADGES', href: 'https://tryhackme.com/p/.exe.polar', blank: false },
     },
   ];
 
