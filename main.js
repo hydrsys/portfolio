@@ -526,14 +526,20 @@ function initSolarSystem() {
       if (Math.sqrt(dx * dx + dy * dy) <= hitR) hit = p;
     });
 
-    if (!hit) return;
+    if (!hit) {
+      activePlanet = null;
+      panel.classList.remove('visible'); // La case disparaît
+      return;
+    }
+
     if (activePlanet && activePlanet.id === hit.id) {
       activePlanet = null;
-      panel.classList.remove('visible');
-    } else {
+      panel.classList.remove('visible'); // La case disparaît
+    } 
+    else {
       activePlanet = hit;
       renderPanel(hit, lang);
-      panel.classList.add('visible');
+      panel.classList.add('visible'); // La case apparaît / se met à jour
     }
   });
 
