@@ -528,18 +528,21 @@ function initSolarSystem() {
 
     if (!hit) {
       activePlanet = null;
-      panel.classList.remove('visible'); // La case disparaît
+      panel.classList.remove('visible');
+      panel.style.display = 'none'; // Force la disparition
       return;
     }
 
     if (activePlanet && activePlanet.id === hit.id) {
       activePlanet = null;
-      panel.classList.remove('visible'); // La case disparaît
+      panel.classList.remove('visible');
+      panel.style.display = 'none'; // Force la disparition
     } 
     else {
       activePlanet = hit;
       renderPanel(hit, lang);
-      panel.classList.add('visible'); // La case apparaît / se met à jour
+      panel.classList.add('visible');
+      panel.style.display = 'block'; // Force l'apparition
     }
   });
 
