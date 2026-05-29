@@ -345,16 +345,8 @@ function initSolarSystem() {
       tags:   ['Intrusion', 'Boot-to-Root', 'Linux'],
       link:   { label: '> VIEW_REPORT', href: '../storage/intrusion.pdf', blank: true },
     },
-      id: 3, cat: 'redteam',
-      name: { en: 'Linux Intrusion', fr: 'Intrusion Linux' },
-      status: { en: 'COMPLETED', fr: 'TERMINÉ' },
-      title:  { en: 'Linux Intrusion Test', fr: 'Test d\'intrusion Linux' },
-      desc:   { en: 'Boot-to-Root: research & exploitation of a vulnerable machine.', fr: 'Boot-to-Root : exploitation d\'une machine vulnérable.' },
-      tags:   ['Intrusion', 'Boot-to-Root', 'Linux'],
-      link:   { label: '> VIEW_REPORT', href: '../storage/intrusion.pdf', blank: true },
-    },
     {
-      id: 4, cat: 'sysadmin',
+      id: 2, cat: 'sysadmin',
       name: { en: 'Active Directory', fr: 'Active Directory' },
       status: { en: 'COMPLETED', fr: 'TERMINÉ' },
       title:  { en: 'Active Directory — ValorElec', fr: 'Active Directory — ValorElec' },
@@ -363,7 +355,7 @@ function initSolarSystem() {
       link:   { label: '> CASE_FILE', href: '../storage/ValorElec.pdf', blank: true },
     },
     {
-      id: 5, cat: 'sysadmin',
+      id: 3, cat: 'sysadmin',
       name: { en: 'Linux Hardening', fr: 'Hardening Linux' },
       status: { en: 'COMPLETED', fr: 'TERMINÉ' },
       title:  { en: 'Linux Hardening', fr: 'Hardening Linux' },
@@ -372,7 +364,7 @@ function initSolarSystem() {
       link:   { label: '> SECURITY_POLICIES', href: '../storage/hardening.pdf', blank: true },
     },
     {
-      id: 6, cat: 'code',
+      id: 4, cat: 'code',
       name: { en: 'ACB Website', fr: 'Site ACB' },
       status: { en: 'LIVE', fr: 'EN COURS' },
       title:  { en: 'Client Website — ACB', fr: 'Site Web Client — ACB' },
@@ -381,7 +373,7 @@ function initSolarSystem() {
       link:   { label: '> VIEW_LIVE_SITE', href: 'https://monpolar.github.io/acb/', blank: true },
     },
     {
-      id: 7, cat: 'code',
+      id: 5, cat: 'code',
       name: { en: 'Portfolio', fr: 'Portfolio' },
       status: { en: 'LIVE', fr: 'EN COURS' },
       title:  { en: 'Portfolio — B_SYSTEM', fr: 'Portfolio — B_SYSTEM' },
@@ -390,7 +382,7 @@ function initSolarSystem() {
       link:   { label: '> VIEW_SOURCE', href: 'https://github.com/MonPOLAR/portfolio', blank: true },
     },
     {
-      id: 8, cat: 'ctf',
+      id: 6, cat: 'ctf',
       name: { en: 'TryHackMe', fr: 'TryHackMe' },
       status: { en: 'LIVE', fr: 'EN COURS' },
       title:  { en: 'CTF Training', fr: 'Entraînement CTF' },
