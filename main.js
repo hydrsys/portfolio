@@ -414,7 +414,7 @@ function initSolarSystem() {
     { cat: 'redteam',  radiusFactor: 0.18, speed: 0.00025, color: CAT_COLORS.redteam  },
     { cat: 'sysadmin', radiusFactor: 0.28, speed: 0.00016, color: CAT_COLORS.sysadmin },
     { cat: 'code',     radiusFactor: 0.38, speed: 0.00010, color: CAT_COLORS.code     },
-    { cat: 'ctf',      radiusFactor: 0.46, speed: 0.00007, color: CAT_COLORS.ctf      },
+    { cat: 'ctf',      radiusFactor: 0.46, speed: 1, color: CAT_COLORS.ctf      },
   ];
 
   ORBIT_DEFS.forEach(od => {
