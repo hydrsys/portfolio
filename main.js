@@ -406,7 +406,7 @@ function initSolarSystem() {
       title:  { en: 'Cyber Training', fr: 'Entraînement Cyber' },
       desc:   { en: 'Hack The Box, Recon, Exploit, PrivEsc.', fr: 'Hack The Box, Recon, Exploit, PrivEsc.' },
       tags:   ['CTF', 'Hack The Box', 'Full Pentest'],
-      link:   { label: '> VIEW_BADGES', href: 'https://tryhackme.com/p/.exe.polar', blank: false },
+      link:   { label: '> VIEW_BADGES', href: 'https://profile.hackthebox.com/profile/019e72df-3619-7029-8d9c-d4d4b00289cb', blank: false },
     },
   ];
 
@@ -414,7 +414,7 @@ function initSolarSystem() {
     { cat: 'redteam',  radiusFactor: 0.18, speed: 0.00025, color: CAT_COLORS.redteam  },
     { cat: 'sysadmin', radiusFactor: 0.28, speed: 0.00016, color: CAT_COLORS.sysadmin },
     { cat: 'code',     radiusFactor: 0.38, speed: 0.00010, color: CAT_COLORS.code     },
-    { cat: 'ctf',      radiusFactor: 0.46, speed: 1, color: CAT_COLORS.ctf      },
+    { cat: 'ctf',      radiusFactor: 0.46, speed: 0.00007, color: CAT_COLORS.ctf      },
   ];
 
   ORBIT_DEFS.forEach(od => {
