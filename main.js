@@ -395,8 +395,17 @@ function initSolarSystem() {
       name: { en: 'TryHackMe', fr: 'TryHackMe' },
       status: { en: 'LIVE', fr: 'EN COURS' },
       title:  { en: 'CTF Training', fr: 'Entraînement CTF' },
-      desc:   { en: 'Root-Me & TryHackMe. Focus on Web exploitation and Privilege Escalation.', fr: 'Root-Me & TryHackMe. Focus : Web & Escalade de Privilèges.' },
+      desc:   { en: 'TryHackMe. Focus on Web exploitation and Privilege Escalation.', fr: 'TryHackMe. Focus : Web & Escalade de Privilèges.' },
       tags:   ['CTF', 'PrivEsc', 'Cyber-Training'],
+      link:   { label: '> VIEW_BADGES', href: 'https://tryhackme.com/p/.exe.polar', blank: false },
+    },
+    {
+      id: 8, cat: 'ctf',
+      name: { en: 'HTB', fr: 'HTB' },
+      status: { en: 'LIVE', fr: 'EN COURS' },
+      title:  { en: 'Cyber Training', fr: 'Entraînement Cyber' },
+      desc:   { en: 'Hack The Box, Recon, Exploit, PrivEsc.', fr: 'Hack The Box, Recon, Exploit, PrivEsc.' },
+      tags:   ['CTF', 'Hack The Box', 'Full Pentest'],
       link:   { label: '> VIEW_BADGES', href: 'https://tryhackme.com/p/.exe.polar', blank: false },
     },
   ];
