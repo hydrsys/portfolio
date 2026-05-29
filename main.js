@@ -346,6 +346,15 @@ function initSolarSystem() {
       link:   { label: '> VIEW_REPORT', href: '../storage/intrusion.pdf', blank: true },
     },
     {
+      id: 7, cat: 'redteam',
+      name: { en: 'Web Pentest', fr: 'Pentest Web' },
+      status: { en: 'COMPLETED', fr: 'TERMINÉ' },
+      title:  { en: 'Web Application Penetration Testing', fr: 'Test d\'Intrusion Application Web' },
+      desc:   { en: 'Infrastructure mapping with Nmap, directory fuzzing via Gobuster, PHP injections, and exploitation of web vulnerabilities.', fr: 'Cartographie de l\'infrastructure avec Nmap, énumération de répertoires via Gobuster, injections PHP  et exploitation de vulnérabilités web.' },
+      tags:   ['GoBuster', 'PHP Injection', 'Web Security'],
+      link:   { label: '> AUDIT_REPORT', href: '../storage/web_pentest.pdf', blank: true },
+    },
+    {
       id: 2, cat: 'sysadmin',
       name: { en: 'Active Directory', fr: 'Active Directory' },
       status: { en: 'COMPLETED', fr: 'TERMINÉ' },
