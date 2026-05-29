@@ -529,20 +529,16 @@ function initSolarSystem() {
     if (!hit) {
       activePlanet = null;
       panel.classList.remove('visible');
-      panel.style.display = 'none'; // Force la disparition
       return;
     }
 
     if (activePlanet && activePlanet.id === hit.id) {
       activePlanet = null;
       panel.classList.remove('visible');
-      panel.style.display = 'none'; // Force la disparition
-    } 
-    else {
+    } else {
       activePlanet = hit;
       renderPanel(hit, lang);
       panel.classList.add('visible');
-      panel.style.display = 'block'; // Force l'apparition
     }
   });
 
