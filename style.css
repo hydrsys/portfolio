@@ -934,28 +934,23 @@ body.page-victory::before {
   align-items: center;
   justify-content: center;
   padding: 20px;
-}
-
-opacity: 0;
+  opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-#project-panel:empty,
-#project-panel:not(.visible) {
-  pointer-events: none;
-}
-
-#project-panel .project-card {
-  width: 100%;
-  max-width: 340px;
 }
 
 #project-panel.visible {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+}
+
+#project-panel .project-card {
+  width: 100%;
+  max-width: 340px;
+  border-color: rgba(207, 122, 255, 0.3) !important;
+  box-shadow: 0 0 16px rgba(207, 122, 255, 0.12);
 }
 
 /* Responsive */
@@ -977,6 +972,8 @@ opacity: 0;
     min-height: 0;
     padding: 16px;
     justify-content: flex-start;
+    opacity: 1;
+    visibility: visible;
   }
 }
 
